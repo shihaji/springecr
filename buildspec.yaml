@@ -1,0 +1,22 @@
+version: 0.2
+phases:
+   pre_build:
+      commands:
+         - echo logging into ecr
+         - mvn clean package
+         - aws --version
+         - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 657161770630.dkr.ecr.ap-south-1.amazonaws.com
+         - REPOSITORY_URI=657161770630.dkr.ecr.ap-south-1.amazonaws.com/springecr
+         - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+   build:
+       commands:
+          - echo building the docker image
+          - docker build -t $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+
+   post_build:
+      commands:
+         - echo pushing the docker image
+         - docker push $REPOSITORY_URI:latest
+         - printf '[{"name":"mycontainer","imageUri":"%s"}]' $REPOSITORY_URI:latest>imagedefinitions.json
+artifacts:
+   files: imagedefinitions.json                 
