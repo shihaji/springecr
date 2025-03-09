@@ -9,7 +9,7 @@ public class AppController {
 	@GetMapping("home")
 	public String getHome() {
 		
-		return "hello world";
+		return "hello world again";
 	}
 	
 	
