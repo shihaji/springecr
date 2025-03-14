@@ -12,7 +12,7 @@ public class AppController {
 	@GetMapping("home")
 	public String getHome() {
 		
-		return "hello world again botree";
+		return "hello Chennai";
 	}
 	
 	@GetMapping("health")
