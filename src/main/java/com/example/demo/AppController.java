@@ -16,9 +16,9 @@ public class AppController {
 	}
 	
 	@GetMapping("health")
-	public ResponseEntity<Object> getHealth() {
+	public ResponseEntity<String> getHealth() {
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>("ok",HttpStatus.OK);
 	}
 	
 	
