@@ -5,8 +5,8 @@ phases:
          - echo logging into ecr
          - mvn clean package
          - aws --version
-         - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 657161770630.dkr.ecr.ap-south-1.amazonaws.com
-         - REPOSITORY_URI=657161770630.dkr.ecr.ap-south-1.amazonaws.com/springecr
+         - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 657161770630.dkr.ecr.us-east-1.amazonaws.com
+         - REPOSITORY_URI=657161770630.dkr.ecr.us-east-1.amazonaws.com/springecr
          - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
    build:
        commands:
